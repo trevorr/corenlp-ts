@@ -3,8 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
+      - image: scurrilous/corenlp-jre8-alpine:latest
     steps:
-      - setup_remote_docker
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -14,8 +14,6 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-      - run:
-          command: docker-compose up -d
       - run:
           command: npm test
       - run:
