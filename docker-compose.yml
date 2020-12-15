@@ -1,0 +1,7 @@
+version: '3'
+services:
+  corenlp:
+    image: scurrilous/corenlp-jre8-alpine:latest
+    restart: unless-stopped
+    ports:
+      - 9000:9000
