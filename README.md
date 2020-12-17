@@ -14,7 +14,7 @@ npm install corenlp-ts
 ### Typical Usage
 
 ```ts
-import corenlp-ts from 'corenlp-ts';
+import { CoreNLP, DependencyGraph } from 'corenlp-ts';
 
 function printDepParse(g: DependencyGraph, relation = 'root', depth = 0, visited = new Set<DependencyGraph>()): void {
   console.log(`${'  '.repeat(depth)}${relation}: ${g.token.word} (${g.token.index})`);
@@ -28,7 +28,7 @@ function printDepParse(g: DependencyGraph, relation = 'root', depth = 0, visited
 
 const nlp = new CoreNLP('http://localhost:9000');
 const res = await nlp.annotate('She flew to Bali or to Turkey', { annotators: ['depparse'] });
-printDepParse(res.sentences[0].toDependencyGraph());
+res.sentences.forEach((s) => printDepParse(s.toDependencyGraph()));
 ```
 
 ```plain
